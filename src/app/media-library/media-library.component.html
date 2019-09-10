@@ -8,6 +8,9 @@
     <app-type-filter [type$]="type$" (change)="onTypeChange.next($event)"></app-type-filter>
   </div>
   <div class="col">
+    <app-sort-select [sort$]="sort$" (change)="onSortChange.next($event)"></app-sort-select>
+  </div>
+  <div class="col">
     <button class="btn btn-default"(click)="clearFilter()">Clear</button>
   </div>
 </div>

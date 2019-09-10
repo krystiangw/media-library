@@ -1,0 +1,6 @@
+<div class="form-group">
+  <label>Filter By</label>
+  <select class="custom-select" [(ngModel)]="type" (ngModelChange)="change.emit($event);">
+    <option *ngFor="let item of types" [value]="item.type">{{item.name}}</option>
+  </select>
+</div>
