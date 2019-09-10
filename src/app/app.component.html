@@ -1,4 +1,20 @@
 <div class="container">
-  <app-media-library [items$]="items$">
-  </app-media-library>
+  <h1>Media Library - Component</h1>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label>Number of data rows</label>
+        <input type="text" class="form-control" [(ngModel)]="noItems">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group" style="bottom: 0; position: absolute;">
+        <button class="btn btn-primary" (click)="generateItems()">Generate data</button>
+      </div>
+    </div>
+  </div>
+  <div class="black-container">
+    <app-media-library [items$]="items$">
+    </app-media-library>
+  </div>
 </div>
