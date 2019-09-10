@@ -18,19 +18,19 @@ export class MediaLibraryComponent implements OnInit {
   public defaultOrder = 'ascending';
   public order$ = new BehaviorSubject(this.defaultOrder);
 
-  public onSearchTextChange = this.createBehaviourSubject(this.searchText$.getValue());
-  public onTypeChange = this.createBehaviourSubject(this.type$.getValue());
-  public onSortChange = this.createBehaviourSubject(this.sort$.getValue());
-  public onOrderChange = this.createBehaviourSubject(this.order$.getValue());
+  public onSearchTextChange = new BehaviorSubject(this.searchText$.getValue());
+  public onTypeChange = new BehaviorSubject(this.type$.getValue());
+  public onSortChange = new BehaviorSubject(this.sort$.getValue());
+  public onOrderChange = new BehaviorSubject(this.order$.getValue());
   public filteredItems$: Observable<MediaLibraryItem[]>;
 
   public ngOnInit() {
     this.filteredItems$ = combineLatest(
       this.items$,
-      this.onSearchTextChange,
-      this.onTypeChange,
-      this.onSortChange,
-      this.onOrderChange
+      this.filterStringStream(this.onSearchTextChange),
+      this.filterStringStream(this.onTypeChange),
+      this.filterStringStream(this.onSortChange),
+      this.filterStringStream(this.onOrderChange)
     )
     .pipe(
       map(([items, searchText, selectedType, sortType, order]) => {
@@ -55,8 +55,7 @@ export class MediaLibraryComponent implements OnInit {
     this.order$.next(this.defaultOrder);
   }
 
-  private createBehaviourSubject(value: any) {
-    return new BehaviorSubject(value)
-      .pipe(filter((selectedType) => typeof selectedType === 'string'));
+  private filterStringStream(stream: BehaviorSubject<string>) {
+    return stream.pipe(filter((selectedType) => typeof selectedType === 'string'));
   }
 }
