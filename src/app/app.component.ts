@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MediaLibraryItem } from '@app/media-library/models/media-library-item';
 import { range, sample } from 'lodash';
 import * as randomWords from 'random-words';
-import { mediaLibraryTypes } from '@app/media-library/models/media-library-type';
+import { mediaLibraryTypeList } from '@app/media-library/models/media-library-type';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -19,12 +19,15 @@ export class AppComponent implements OnInit {
   }
 
   public generateItems() {
-    this.items$.next(range(this.noItems).map(id => ({
-      id,
-      name: randomWords(),
-      type: sample(mediaLibraryTypes),
-      uploadedAt: this.randomDate(new Date(2016, 0, 1), new Date()).getTime()
-    })))
+    this.items$.next(range(this.noItems).map(id => {
+      const type = sample(mediaLibraryTypeList);
+      return {
+        id,
+        name: `${randomWords()}_${randomWords()}.${type.extension}`,
+        type: type.type,
+        uploadedAt: this.randomDate(new Date(2016, 0, 1), new Date()).getTime()
+      };
+    }));
   }
 
   private randomDate(start, end) {
