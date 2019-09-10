@@ -1,4 +1,6 @@
 <h1>media-library component</h1>
+<app-search-filter [searchText]="searchText" (onChange)="onSearchTextChange.next($event)">
+</app-search-filter>
 <ul class="list-group">
-  <li class="list-group-item" *ngFor="let item of items">{{item.name}} {{item.uploadedAt | date}}</li>
+  <li class="list-group-item" *ngFor="let item of filteredItems$ | async">{{item.name}} {{item.uploadedAt | date}}</li>
 </ul>
