@@ -2,12 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { MediaLibraryComponent } from '@app/media-library/media-library.component';
-import { SearchFilterComponent } from '@app/media-library/components';
+import { SearchFilterComponent, TypeFilterComponent } from '@app/media-library/components';
 
 @NgModule({
   declarations: [
     MediaLibraryComponent,
-    SearchFilterComponent
+    SearchFilterComponent,
+    TypeFilterComponent
   ],
   imports: [
     BrowserModule,

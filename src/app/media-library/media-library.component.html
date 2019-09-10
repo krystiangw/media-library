@@ -1,6 +1,16 @@
 <h1>media-library component</h1>
-<app-search-filter [searchText]="searchText" (onChange)="onSearchTextChange.next($event)">
-</app-search-filter>
+<div class="row">
+  <div class="col">
+    <app-search-filter [searchText]="searchText" (onChange)="onSearchTextChange.next($event)"></app-search-filter>
+  </div>
+  <div class="col">
+    <app-type-filter [type]="type" (onChange)="onTypeChange.next($event)"></app-type-filter>
+  </div>
+</div>
 <ul class="list-group">
-  <li class="list-group-item" *ngFor="let item of filteredItems$ | async">{{item.name}} {{item.uploadedAt | date}}</li>
+  <li class="list-group-item" *ngFor="let item of filteredItems$ | async">
+    <span>{{item.name}}</span>
+    <small class="text-gray"> ({{item.type}})</small>
+    <small> {{item.uploadedAt | date}}</small>
+  </li>
 </ul>

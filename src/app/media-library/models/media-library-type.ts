@@ -1,25 +1,25 @@
-export type MediaLibraryType = 'video' | 'interactiveVide' | 'audio' | 'image' | 'document';
+export type MediaLibraryType = 'Video' | 'Interactive Video' | 'Audio' | 'Image' | 'Document';
 
 export const mediaLibraryTypeList: { name: string, type: MediaLibraryType }[] = [
   {
-    name: 'Video',
-    type: 'video'
+    name: 'Videos',
+    type: 'Video'
   },
   {
-    name: 'Interactive Video',
-    type: 'interactiveVide'
+    name: 'Interactive Videos',
+    type: 'Interactive Video'
   },
   {
-    name: 'audio',
-    type: 'audio'
+    name: 'Audio',
+    type: 'Audio'
   },
   {
-    name: 'Image',
-    type: 'image'
+    name: 'Images',
+    type: 'Image'
   },
   {
-    name: 'Document',
-    type: 'document'
+    name: 'Documents',
+    type: 'Document'
   }
 ];
 

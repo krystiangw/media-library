@@ -8,9 +8,4 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 export class SearchFilterComponent {
   @Input() searchText = '';
   @Output() onChange: EventEmitter<string> = new EventEmitter();
-
-  public onChangex(val) {
-    console.log('onChangex ', val);
-    this.onChange.emit(val);
-  }
 }

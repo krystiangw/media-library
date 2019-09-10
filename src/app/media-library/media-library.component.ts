@@ -11,18 +11,22 @@ import { map, concatAll } from 'rxjs/operators';
 export class MediaLibraryComponent implements OnInit {
   @Input() items$: Observable<MediaLibraryItem[]>;
   public searchText = '';
+  public type = '';
   public onSearchTextChange = new BehaviorSubject(this.searchText);
-
+  public onTypeChange = new BehaviorSubject(this.searchText);
   public filteredItems$: Observable<MediaLibraryItem[]>;
 
   public ngOnInit() {
     this.filteredItems$ = combineLatest(
       this.items$,
-      this.onSearchTextChange
+      this.onSearchTextChange,
+      this.onTypeChange
     )
     .pipe(
-      map(([items, searchText]) => {
-        return items.filter(({ name }) => !searchText || (name || '').indexOf(searchText) > -1);
+      map(([items, searchText, selectedType]) => {
+        return items
+          .filter(({ name }) => !searchText || (name || '').indexOf(searchText) > -1)
+          .filter(({ type }) => !selectedType || type === selectedType);
       })
     );
   }
