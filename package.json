@@ -1,4 +1,9 @@
 {
+  "author": {
+    "name": "Krystian Gwizdala",
+    "email": "gwizdala.kr@gmail.com",
+    "url": "https://github.com/krystiangw"
+  },
   "name": "media-library",
   "version": "0.0.0",
   "scripts": {
