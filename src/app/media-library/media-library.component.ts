@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { MediaLibraryItem } from './models/media-library-item';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { map, concatAll } from 'rxjs/operators';
+import { map, filter, concatAll } from 'rxjs/operators';
 
 @Component({
   selector: 'app-media-library',
@@ -10,10 +10,11 @@ import { map, concatAll } from 'rxjs/operators';
 })
 export class MediaLibraryComponent implements OnInit {
   @Input() items$: Observable<MediaLibraryItem[]>;
-  public searchText = '';
-  public type = '';
-  public onSearchTextChange = new BehaviorSubject(this.searchText);
-  public onTypeChange = new BehaviorSubject(this.searchText);
+  public searchText$ = new BehaviorSubject('');
+  public type$ = new BehaviorSubject('');
+  public onSearchTextChange = new BehaviorSubject(this.searchText$.getValue());
+  public onTypeChange = new BehaviorSubject(this.type$.getValue())
+    .pipe(filter((selectedType) => typeof selectedType === 'string'));
   public filteredItems$: Observable<MediaLibraryItem[]>;
 
   public ngOnInit() {
@@ -29,5 +30,10 @@ export class MediaLibraryComponent implements OnInit {
           .filter(({ type }) => !selectedType || type === selectedType);
       })
     );
+  }
+
+  public clearFilter() {
+    this.searchText$.next('');
+    this.type$.next('');
   }
 }

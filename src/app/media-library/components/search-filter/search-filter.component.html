@@ -1,3 +1,3 @@
 <div class="input-group mb-3">
-  <input type="text" class="form-control" [ngModel]="searchText" (ngModelChange)="onChange.emit($event)">
+  <input type="text" class="form-control" [(ngModel)]="searchText" (ngModelChange)="change.emit($event)">
 </div>

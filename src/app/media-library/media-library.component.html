@@ -1,10 +1,14 @@
-<h1>media-library component</h1>
+<div class="row">
+  <div class="col-sm-6">
+    <app-search-filter [searchText$]="searchText$" (change)="onSearchTextChange.next($event)"></app-search-filter>
+  </div>
+</div>
 <div class="row">
   <div class="col">
-    <app-search-filter [searchText]="searchText" (onChange)="onSearchTextChange.next($event)"></app-search-filter>
+    <app-type-filter [type$]="type$" (change)="onTypeChange.next($event)"></app-type-filter>
   </div>
   <div class="col">
-    <app-type-filter [type]="type" (onChange)="onTypeChange.next($event)"></app-type-filter>
+    <button class="btn btn-default"(click)="clearFilter()">Clear</button>
   </div>
 </div>
 <ul class="list-group">
