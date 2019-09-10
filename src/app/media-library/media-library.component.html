@@ -1,1 +1,4 @@
 <h1>media-library component</h1>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let item of items">{{item.name}} {{item.uploadedAt | date}}</li>
+</ul>

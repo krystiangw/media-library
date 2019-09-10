@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { MediaLibraryItem } from './models/media-library-item';
 
 @Component({
   selector: 'app-media-library',
@@ -6,4 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./media-library.component.scss']
 })
 export class MediaLibraryComponent {
+  @Input() items: MediaLibraryItem[];
 }

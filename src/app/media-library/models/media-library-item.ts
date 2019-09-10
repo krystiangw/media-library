@@ -1,4 +1,4 @@
-export type MediaLibraryType = 'video' |  'interactiveVide' | 'audio' | 'image' | 'document';
+import { MediaLibraryType } from './';
 
 export interface MediaLibraryItem {
   id: number;
