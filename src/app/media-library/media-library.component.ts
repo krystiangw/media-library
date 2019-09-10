@@ -15,10 +15,18 @@ export class MediaLibraryComponent implements OnInit {
   public type$ = new BehaviorSubject('');
   public defaultSort = 'name';
   public sort$ = new BehaviorSubject(this.defaultSort);
+  public defaultOrder = 'ascending';
+  public order$ = new BehaviorSubject(this.defaultOrder);
+
   public onSearchTextChange = new BehaviorSubject(this.searchText$.getValue());
+
   public onTypeChange = new BehaviorSubject(this.type$.getValue())
     .pipe(filter((selectedType) => typeof selectedType === 'string'));
+
   public onSortChange = new BehaviorSubject(this.sort$.getValue())
+    .pipe(filter((selectedType) => typeof selectedType === 'string'));
+
+  public onOrderChange = new BehaviorSubject(this.order$.getValue())
     .pipe(filter((selectedType) => typeof selectedType === 'string'));
 
   public filteredItems$: Observable<MediaLibraryItem[]>;
@@ -28,17 +36,22 @@ export class MediaLibraryComponent implements OnInit {
       this.items$,
       this.onSearchTextChange,
       this.onTypeChange,
-      this.onSortChange
+      this.onSortChange,
+      this.onOrderChange
     )
     .pipe(
-      map(([items, searchText, selectedType, sortType]) => {
-        console.log('sortType ', sortType);
-        return orderBy(
+      map(([items, searchText, selectedType, sortType, order]) => {
+        console.log('order ', order);
+        const filteredItems = orderBy(
             items
               .filter(({ name }) => !searchText || (name || '').indexOf(searchText) > -1)
               .filter(({ type }) => !selectedType || type === selectedType),
             sortType
           );
+        if (order !== this.defaultOrder) {
+          return filteredItems.reverse();
+        }
+        return filteredItems;
       })
     );
   }
@@ -47,5 +60,6 @@ export class MediaLibraryComponent implements OnInit {
     this.searchText$.next('');
     this.type$.next('');
     this.sort$.next(this.defaultSort);
+    this.order$.next(this.defaultOrder);
   }
 }

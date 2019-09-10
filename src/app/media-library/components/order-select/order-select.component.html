@@ -1,5 +1,5 @@
 <div class="form-group">
-  <label>Sort By</label>
+  <label>Order</label>
   <select class="custom-select" [(ngModel)]="type" (ngModelChange)="change.emit($event);">
     <option *ngFor="let item of types" [value]="item.type">{{item.name}}</option>
   </select>

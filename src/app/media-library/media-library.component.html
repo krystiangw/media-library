@@ -13,6 +13,9 @@
   <div class="col">
     <button class="btn btn-default"(click)="clearFilter()">Clear</button>
   </div>
+  <div class="col">
+    <app-order-select [order$]="order$" (change)="onOrderChange.next($event)"></app-order-select>
+  </div>
 </div>
 <ul class="list-group">
   <li class="list-group-item" *ngFor="let item of filteredItems$ | async">
